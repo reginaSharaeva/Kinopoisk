@@ -11,6 +11,9 @@
     <!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
     <context:annotation-config />
 
+    <!-- Определяем папку, в которой будем искать веб компоненты (контроллеры)-->
+    <context:component-scan base-package="com.itis.dz.controllers"/>
+
     <!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) -->
     <mvc:annotation-driven />
 

@@ -21,7 +21,6 @@ public class MainPageController extends BaseController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String renderMainPage() {
         request.setAttribute("movieList", movieService.getMovies());
-        return "testElastic";
-        //return "main/main";
+        return "main/main";
     }
 }

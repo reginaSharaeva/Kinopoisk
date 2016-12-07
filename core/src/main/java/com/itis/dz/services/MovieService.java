@@ -13,8 +13,7 @@ public interface MovieService {
 
     @Transactional
     List<Movie> getMovies();
-    @Transactional
-    List<Movie> getMoviesWithBigRating();
+
     @Transactional
     void addTestData();
 

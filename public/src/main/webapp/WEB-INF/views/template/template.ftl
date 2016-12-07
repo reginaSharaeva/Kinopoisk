@@ -96,16 +96,30 @@
             }
             init();
         });
-        function toggleChevron(e) {
-            $(e.target)
-                    .prev('.panel-heading')
-                    .find("i.indicator")
-                    .toggleClass('fa-caret-down fa-caret-right');
-        }
-        $('#accordion').on('hidden.bs.collapse', toggleChevron);
-        $('#accordion').on('shown.bs.collapse', toggleChevron);
     });
+    $(function () {
+        $('#search').focus(
+                function () {
+                    $('.menu').css('display', 'none');
+                    $('#search').css('width', '1000px');
+                }
+        );
+        $('#search').blur(
+                function () {
+                    $('.menu').css('display', 'table-cell');
+                    $('#search').css('width', '200px');
+                }
+        );
 
+    function toggleChevron(e) {
+        $(e.target)
+                .prev('.panel-heading')
+                .find("i.indicator")
+                .toggleClass('fa-caret-down fa-caret-right');
+    }
+    $('#accordion').on('hidden.bs.collapse', toggleChevron);
+    $('#accordion').on('shown.bs.collapse', toggleChevron);
+    });
 </script>
 </body>
 </html>

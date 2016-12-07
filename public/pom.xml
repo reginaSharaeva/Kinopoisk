@@ -12,6 +12,7 @@
     <artifactId>public</artifactId>
 
     <packaging>war</packaging>
+
     <dependencies>
         <dependency>
             <groupId>Kinopoisk</groupId>

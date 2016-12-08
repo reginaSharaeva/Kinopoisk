@@ -61,7 +61,10 @@ public class MovieServiceImpl implements MovieService {
         }
         return movieRepository.getMovies();
     }
-
+    public List<Movie> getMoviesWithBigRating() {
+        List<Movie> movies = movieRepository.getMoviesWithBigRating();
+        return movieRepository.getMoviesWithBigRating();
+    }
     public void addTestData(){
 
 

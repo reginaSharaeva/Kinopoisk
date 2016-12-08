@@ -21,6 +21,12 @@ public class MainPageController extends BaseController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String renderMainPage() {
         request.setAttribute("movieList", movieService.getMovies());
+<<<<<<< HEAD
+=======
+        System.out.println( movieService.getMoviesWithBigRating());
+        request.setAttribute("movies", movieService.getMoviesWithBigRating());
+        //return "testElastic";
+>>>>>>> remotes/origin/is4
         return "main/main";
     }
 }

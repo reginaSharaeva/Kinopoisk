@@ -1,6 +1,7 @@
 package com.itis.dz.repositories;
 
 import com.itis.dz.entities.Movie;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class MovieRepository {
 
     public void addMovie(Movie movie) {
         sessionFactory.getCurrentSession().save(movie);
+    }
+    public List<Movie> getMoviesWithBigRating() {
+
+        List<Movie> result;
+        Criteria crit2 = sessionFactory.getCurrentSession().createCriteria(Movie.class);
+        crit2.addOrder(org.hibernate.criterion.Order.desc("totalraiting"));
+        crit2.setMaxResults(5);
+        result = crit2.list();
+        return result;
     }
 
     public void changeTotalRaiting(Long id, int total) {

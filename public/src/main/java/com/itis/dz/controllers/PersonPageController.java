@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping(value = "/catalog")
+@RequestMapping(value = "/person")
 public class PersonPageController {
 
     @Autowired
@@ -27,6 +27,6 @@ public class PersonPageController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String renderPersonPage(@PathVariable("id") Long id) {
         request.setAttribute("person", personService.getPersonById(id));
-        return "catalog/catalog";
+        return "person/personInfo";
     }
 }

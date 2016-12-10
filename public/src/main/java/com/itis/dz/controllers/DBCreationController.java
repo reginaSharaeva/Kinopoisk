@@ -29,9 +29,11 @@ public class DBCreationController extends BaseController {
 
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping("/createDB")
-    public String createDB(){
+    public String createDB() {
         userService.addTestData();
         awardService.addTestData();
         countryService.addTestData();
@@ -39,7 +41,7 @@ public class DBCreationController extends BaseController {
         roleService.addTestData();
         personService.addTestData();
         movieService.addTestData();
-
+        commentService.addTestData();
 
         return "redirect:/";
     }

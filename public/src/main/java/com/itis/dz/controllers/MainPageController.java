@@ -23,7 +23,14 @@ public class MainPageController extends BaseController {
         request.setAttribute("movieList", movieService.getMovies());
         System.out.println( movieService.getMoviesWithBigRating());
         request.setAttribute("movies", movieService.getMoviesWithBigRating());
+        request.setAttribute("genres", movieService.getMoviesGenres());
         //return "testElastic";
         return "main/main";
+    }
+
+    @RequestMapping(value = "/mostpopular", method = RequestMethod.GET)
+    public String renderMoviePage() {
+        request.setAttribute("movies", movieService.getPopularMovies());
+        return "/catalog/catalog";
     }
 }

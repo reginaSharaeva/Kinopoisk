@@ -1,7 +1,7 @@
 package com.itis.dz.entities;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "comment")
@@ -15,13 +15,21 @@ public class Comment {
     private String text;
 
     @Column
-    private Date date;
+    private Calendar date;
 
+    public Comment(String text, Calendar date, User user, Movie movie) {
+        this.text = text;
+        this.date = date;
+        this.user = user;
+        this.movie = movie;
+    }
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "person_id", nullable = false)
-    private Person person;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
+    public Comment() {
+    }
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
@@ -43,20 +51,20 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getUser() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Movie getMovie() {
@@ -65,5 +73,16 @@ public class Comment {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", date=" + date +
+                ", user=" + user +
+                ", movie=" + movie +
+                '}';
     }
 }

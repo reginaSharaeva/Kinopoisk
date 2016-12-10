@@ -21,8 +21,6 @@ public class Person {
     @Column
     private String secondName;
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
-    private List<Comment> comments;
 
     @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
     private List<Raiting> raitings;
@@ -116,14 +114,6 @@ public class Person {
 
     public void setCountry(Country country) {
         this.country = country;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
     public List<Raiting> getRaitings() {
         return raitings;

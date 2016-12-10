@@ -16,22 +16,21 @@ public class Movie {
     private String name;
 
     @ManyToMany
-    @JoinTable(name="movie_genres",
-            joinColumns = @JoinColumn(name="MOVIE_ID", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="GENRE_ID", referencedColumnName="id")
+    @JoinTable(name = "movie_genres",
+            joinColumns = @JoinColumn(name = "MOVIE_ID", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "GENRE_ID", referencedColumnName = "id")
     )
-    private List <Genre> genres;
+    private List<Genre> genres;
 
 
     @ManyToMany
     @JoinTable(name = "movie_persons",
-            joinColumns = @JoinColumn(name = "MOVIE_ID", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName="id"))
+            joinColumns = @JoinColumn(name = "MOVIE_ID", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "PERSON_ID", referencedColumnName = "id"))
     private List<Person> persons;
 
 
-
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
     private List<Raiting> raitings;
 
     private int totalraiting;
@@ -39,7 +38,7 @@ public class Movie {
     private long mencount;
 
 
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "movie")
     private List<Comment> comments;
 
     @Column
@@ -80,7 +79,8 @@ public class Movie {
         this.totalraiting = totalraiting;
     }
 
-    public Movie(String name, List<Genre> genres, List<Person> persons, int totalraiting, long mencount, int time, int year, int age, String img, String description, Country country) {
+    public Movie(List<Comment> comments, String name, List<Genre> genres, List<Person> persons, int totalraiting, long mencount, int time, int year, int age, String img, String description, Country country) {
+        this.comments = comments;
         this.name = name;
         this.genres = genres;
         this.persons = persons;
@@ -93,7 +93,20 @@ public class Movie {
         this.description = description;
         this.country = country;
     }
+    public Movie(String name, List<Genre> genres, List<Person> persons, int totalraiting, long mencount, int time, int year, int age, String img, String description, Country country) {
 
+        this.name = name;
+        this.genres = genres;
+        this.persons = persons;
+        this.totalraiting = totalraiting;
+        this.mencount = mencount;
+        this.time = time;
+        this.year = year;
+        this.age = age;
+        this.img = img;
+        this.description = description;
+        this.country = country;
+    }
     public Movie(String name, List<Genre> genres, List<Person> persons, List<Raiting> raitings, int totalraiting, long mencount, List<Comment> comments, int time, int year, int age, String img, String description, Country country) {
         this.name = name;
         this.genres = genres;
@@ -150,20 +163,39 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-    public List<Genre> getGenres() {return genres;}
 
-    public void setGenres(List<Genre> genres) {this.genres = genres;}
+    public List<Genre> getGenres() {
+        return genres;
+    }
 
-    public double getTime() {return time;}
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
 
-    public void setTime(int time) {this.time = time;}
+    public double getTime() {
+        return time;
+    }
 
-    public int getAge() {return age;}
+    public void setTime(int time) {
+        this.time = time;
+    }
 
-    public void setAge(int age) {this.age = age;}
+    public int getAge() {
+        return age;
+    }
 
-    public Country getCountry() {return country;}
-    public void setCountry(Country country) {this.country = country;}
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     public List<Raiting> getRaitings() {
         return raitings;
     }
@@ -179,10 +211,12 @@ public class Movie {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
-    public void  setImg(String i){
-        this.img=i;
+
+    public void setImg(String i) {
+        this.img = i;
     }
-    public String getImg(){
+
+    public String getImg() {
         return img;
     }
 }

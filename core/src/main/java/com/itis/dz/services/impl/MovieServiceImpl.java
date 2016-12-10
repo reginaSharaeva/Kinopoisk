@@ -1,13 +1,7 @@
 package com.itis.dz.services.impl;
 
-import com.itis.dz.entities.Genre;
-import com.itis.dz.entities.Movie;
-import com.itis.dz.entities.Person;
-import com.itis.dz.entities.Raiting;
-import com.itis.dz.repositories.CountryRepository;
-import com.itis.dz.repositories.GenreRepository;
-import com.itis.dz.repositories.MovieRepository;
-import com.itis.dz.repositories.PersonRepository;
+import com.itis.dz.entities.*;
+import com.itis.dz.repositories.*;
 import com.itis.dz.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +17,8 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private GenreRepository genreRepository;
 
+    @Autowired
+    private CommentRepository commentRepository;
     @Autowired
     private CountryRepository countryRepository;
 
@@ -61,6 +57,16 @@ public class MovieServiceImpl implements MovieService {
         }
         return movieRepository.getMovies();
     }
+
+    public List<String> getMoviesGenres() {
+        List<String> movies = movieRepository.getMoviesGenres();
+
+        return movieRepository.getMoviesGenres();
+    }
+    public List<Movie> getPopularMovies() {
+        List<Movie> movies = movieRepository.getPopularMovies();
+        return movieRepository.getPopularMovies();
+    }
     public List<Movie> getMoviesWithBigRating() {
         List<Movie> movies = movieRepository.getMoviesWithBigRating();
         return movieRepository.getMoviesWithBigRating();
@@ -79,11 +85,13 @@ public class MovieServiceImpl implements MovieService {
         List<Person> persons1=new ArrayList<Person>();
         persons1.add(personRepository.getPersonByid((long)1));
         persons1.add(personRepository.getPersonByid((long)2));
-
-        Movie movie1 = new Movie("Home run", genres1, persons1, 10, 20, 115, 2016, 16, "/resources/i/page-1_img01.jpg",
+        List<Comment> list=new ArrayList<>();
+        list.add(commentRepository.getCommentById((long)1));
+        list.add(commentRepository.getCommentById((long)2));
+        Movie movie1 = new Movie(list,"Home run", genres1, persons1, 10, 20, 115, 2016, 16, "/resources/i/page-1_img01.jpg",
                 "За гранью сознания лежит новая реальность", countryRepository.getCountryById((long)1));
 
-        Movie movie2 = new Movie("GI Joe retaliation", genres1, persons1, 10, 20, 115, 2016, 16, "/resources/i/page-1_img02_original.jpg",
+        Movie movie2 = new Movie(list,"GI Joe retaliation", genres1, persons1, 10, 20, 115, 2016, 16, "/resources/i/page-1_img02_original.jpg",
                 "За гранью сознания лежит новая реальность", countryRepository.getCountryById((long)1));
 
         Movie movie3 = new Movie("Bullet to the head", genres2, persons1, 10, 20, 115, 2016, 16, "/resources/i/1.jpg",

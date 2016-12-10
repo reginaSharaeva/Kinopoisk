@@ -14,6 +14,10 @@ public interface MovieService {
     @Transactional
     List<Movie> getMovies();
     @Transactional
+    List<Movie> getPopularMovies();
+    @Transactional
+    List<String> getMoviesGenres();
+    @Transactional
     List<Movie> getMoviesWithBigRating();
     @Transactional
     void addTestData();

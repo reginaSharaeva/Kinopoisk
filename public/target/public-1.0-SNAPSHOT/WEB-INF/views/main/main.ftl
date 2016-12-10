@@ -7,8 +7,29 @@
 
     <div class="container-fluid">
         <div class="row">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="input-group">
+                    <div class="input-group-btn search-panel">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Filter by</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#name">Название</a></li>
+                            <li><a href="#actors">Актёры</a></li>
+                            <li><a href="#directors">Режиссёры</a></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
 
-            <!-- RD Navbar Search -->
+            <!-- RD Navbar Search
             <div class="rd-navbar-search-wrap">
                 <div class="rd-navbar-search">
                     <form class="rd-navbar-search-form" action="#" method="GET">
@@ -53,8 +74,7 @@
                     <div class="panel-body">
                         <div class="panel-heading ">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse0">
-                                    <i class="indicator fa fa-caret-down" aria-hidden="true"></i> Год выпуска
+                                <a data-toggle="collapse" href="#collapse0"> Год выпуска
                                 </a>
                             </h4>
                         </div>
@@ -86,160 +106,22 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="panel-heading ">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse1">
-                                    <i class="indicator fa fa-caret-down" aria-hidden="true"></i> Название
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            citroen
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            benz
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            bmw
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse3"><i class="indicator fa fa-caret-down"
-                                                                               aria-hidden="true"></i> Жанр</a>
+                                <a data-toggle="collapse" href="#collapse3"> Жанр</a>
                             </h4>
                         </div>
                         <div id="collapse3" class="panel-collapse collapse in">
                             <ul class="list-group">
+                                <#list genres as genre>
                                 <li class="list-group-item">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" value="">
-                                            red
+                                            <input type="checkbox" value="${genre}">
+                                        ${genre}
                                         </label>
                                     </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            blue
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            green
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            green
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            green
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse2"><i class="indicator fa fa-caret-right"
-                                                                               aria-hidden="true"></i> Актёры
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse2" class="panel-collapse collapse">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            7
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            8
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            9
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse2"><i class="indicator fa fa-caret-right"
-                                                                               aria-hidden="true"></i> Режиссёры
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse4" class="panel-collapse collapse">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            7
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            8
-                                        </label>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                            9
-                                        </label>
-                                    </div>
-                                </li>
+                                </li></#list>
                             </ul>
                         </div>
                     </div>

@@ -25,7 +25,7 @@
                     <!-- RD Navbar Nav -->
                     <ul class="rd-navbar-nav">
                         <li class="active rd-navbar--has-megamenu rd-navbar-submenu">
-                            <a href="/">Главаная</a>
+                            <a href="/">Главная</a>
                             <span class="rd-navbar-submenu-toggle"></span>
                             <span class="rd-navbar-submenu-toggle"></span></li>
                         <li>

@@ -7,4 +7,8 @@ import javax.transaction.Transactional;
 public interface CommentService {
     @Transactional
     Comment getCommentById(Long id);
+    @Transactional
+    void addComment(Comment comment);
+    @Transactional
+    void addTestData();
 }

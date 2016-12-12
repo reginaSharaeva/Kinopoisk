@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
     }
     public void addTestData(){
 
-        userRepository.addUser(new User("vasya@mail.ru","81dc9bdb52d04dc20036dbd8313ed055", "Василий","Role_User"));
-        userRepository.addUser(new User("andrey@mail.ru","81dc9bdb52d04dc20036dbd8313ed055", "Андрей","Role_Admin"));
+        userRepository.addUser(new User("vasya@mail.ru","81dc9bdb52d04dc20036dbd8313ed055", "Василий","ROLE_USER"));
+        userRepository.addUser(new User("andrey@mail.ru","81dc9bdb52d04dc20036dbd8313ed055", "Андрей","ROLE_ADMIN"));
     }
 }

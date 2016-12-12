@@ -2,12 +2,13 @@ $(document).ready(function () {
     $(document).on('click', '.js_addComment', function () {
         event.preventDefault();
         var $this = $(this);
-        var r='#remark'+$this.data('id');
         var film_id=$this.data('film_id');
         $.ajax({
             type: 'POST',
             url: '/movie/addComment',
-            data: {filmId: film_id}
+            data: {filmId: film_id,
+            text: $('textarea#msg').val()
+            }
 
         }).done(function (data) {
             //console.log(data);
@@ -18,29 +19,7 @@ $(document).ready(function () {
             }
         }).fail(function () {
             $this.hide();
-            alert("Приносим извинения.<br/>На сервере произошла ошибка");
-        });
-    });
-    $(document).on('click', '.js_addComment', function () {
-        event.preventDefault();
-        var $this = $(this);
-        var r='#remark'+$this.data('id');
-        var film_id=$this.data('film_id');
-        $.ajax({
-            type: 'POST',
-            url: '/movie/addComment',
-            data: {filmId: film_id}
-
-        }).done(function (data) {
-            //console.log(data);
-            if (data != '') {
-                $('.comments-section-grids').append(data);
-            } else {
-                $this.hide();
-            }
-        }).fail(function () {
-            $this.hide();
-            alert("Приносим извинения.<br/>На сервере произошла ошибка");
+            alert("РџСЂРёРЅРѕСЃРёРј РёР·РІРёРЅРµРЅРёСЏ.<br/>РќР° СЃРµСЂРІРµСЂРµ РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°");
         });
     });
 });

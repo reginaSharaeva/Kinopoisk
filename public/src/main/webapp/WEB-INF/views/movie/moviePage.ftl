@@ -146,7 +146,7 @@
     <div class="container comts">
         <form action="/movie/addComment">
             <div class="text">
-                    <textarea name="text" value="Message:" onfocus="this.value = '';"
+                    <textarea id="msg" name="text" value="Message:" onfocus="this.value = '';"
                               onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
             </div>
             <div class="form-submit1">

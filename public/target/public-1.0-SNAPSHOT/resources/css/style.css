@@ -16624,6 +16624,9 @@ img.img-responsive {
 .title a {
     color: #000;
 }
+.col-xs-8.col-xs-offset-2 {
+  margin-top: 40px!important;
+}
 .data p, .data-middle, .data-last p {
     color: #999;
     font-size: 1em;

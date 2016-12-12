@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
@@ -37,24 +36,23 @@ public class MovieController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String renderMoviePage(@PathVariable("id") Long id) {
         request.setAttribute("movie", movieService.getMovieById(id));
+        System.out.println(movieService.getMovieById(id));
+        System.out.println(movieService.getMovieById(id).getComments().size());
         request.setAttribute("comments_count", movieService.getMovieById(id).getComments().size());
         return "/movie/moviePage";
     }
     /**
      * Добавление комментария
      */
-    @ResponseBody
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
-    public String addComment(Long filmId) {
-        User user = null;
+    public String addComment(Long filmId, String text) {
+         User user = null;
         if (AuthorizedUsersInfo.isLoggedIn()) {
             user = AuthorizedUsersInfo.getCurrentUser();
         }
-        System.out.println(request.getParameter("text"));
         if (user != null) {
-            Comment comment=new Comment(request.getParameter("text"), Calendar.getInstance(),user,
+            Comment comment=new Comment(text, Calendar.getInstance(),user,
                     movieService.getMovieById(filmId));
-            System.out.println("coomennr: "+comment);
             commentService.addComment(comment);
             request.setAttribute("comment",comment);
         }

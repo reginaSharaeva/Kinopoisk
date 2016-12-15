@@ -1,7 +1,7 @@
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"]>
 <header class="page-header">
     <!-- RD Navbar -->
-    <div class="rd-navbar-wrap" style="height: 70px;">
+    <div class=rd-navbar-wrap" style="height: 70px;">
         <nav class="rd-navbar rd-navbar--is-stuck rd-navbar-static" data-rd-navbar-lg="rd-navbar-static">
             <!-- RD Navbar Panel -->
             <div class="col-lg-2 col-md-2 col-xs-2">

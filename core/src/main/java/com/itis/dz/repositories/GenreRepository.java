@@ -6,6 +6,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 @Repository
 public class GenreRepository {
     @Autowired
@@ -17,4 +20,9 @@ public class GenreRepository {
     public void addGenre(Genre genre) {
         sessionFactory.getCurrentSession().save(genre);
     }
+    @Transactional
+    public List<Genre> getGenres() {
+        return sessionFactory.getCurrentSession().createCriteria(Genre.class).list();
+    }
+
 }

@@ -46,4 +46,8 @@ public class PersonServiceImpl  implements PersonService {
 
 
     }
+    public List<Person> getPersons() {
+        return personRepository.getPersons();
+    }
+
 }

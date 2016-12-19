@@ -12,10 +12,13 @@
     <link rel="icon" href="/resources/i/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/resources/css/style.css">
     <link type="text/css" rel="stylesheet" href="/resources/css/cbb092d6554938a9549cb716ffcb1f94.css">
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    <script src="/resources/js/jquery-3.1.1.min.js"></script>
+    <script src="/resources/js/jquery-ui.min.js"></script>
+    <script src="/resources/js/react/react.js"></script>
+    <script type="text/babel" src="/resources/js/react/Search.js"></script>
+    <script src="/resources/js/react/react-dom.min.js"></script>
     <script src="/resources/js/main.js"></script>
 </head>
 <body>
@@ -28,10 +31,10 @@
     <div style="font-size: 50px;" class="material-icons"></div>
 </a>
 <!-- jQuery -->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<#--<script src="http://code.jquery.com/jquery-latest.js"></script>-->
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="/resources/css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="/resources/js/core.min.js"></script>
+<#--<script src="/resources/js/core.min.js"></script>-->
 <script src="/resources/js/script.js"></script>
 <script>
     $(function () {

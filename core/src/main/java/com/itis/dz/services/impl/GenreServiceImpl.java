@@ -6,6 +6,8 @@ import com.itis.dz.services.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 
 public class GenreServiceImpl implements GenreService {
@@ -16,6 +18,7 @@ public class GenreServiceImpl implements GenreService {
         return genreRepository.getGenreById(id);
     }
 
+    public List<Genre> getGenres(){return  genreRepository.getGenres();}
 
 
     public void addTestData(){

@@ -7,13 +7,16 @@ var Movie = React.createClass({
         return <li>
             <div className="owl-item active" style={{
                 width: "270px",
-                marginRight: "30px",
-                marginTop: "50px"}}>
+                marginRight: "20px",
+                marginTop: "50px",
+                marginBottom:"50px",
+            }}>
                 <div className="owl-item">
-                    <a href={movie.img} className="thumb mfp-image">
+                    <a href={'/movie/' + movie.id} className="thumb mfp-image">
                         <img src={movie.img} alt=""/>
                     </a>
-                    <h5><a href={'/movie/' + movie.id}
+                    <h5>
+                        <a href={'/movie/' + movie.id}
                            className="text-secondary">{movie.name}</a></h5>
                     <p>{movie.description}</p>
                 </div>
@@ -24,45 +27,44 @@ var Movie = React.createClass({
 
 
 var Sort = React.createClass({
+    sort(){
+     this.props.sort(document.getElementById("sort").value);
+    },
+
     render: function () {
-        return  <div className="col-lg-4 col-md-4 col-xs-4" style={{marginLeft:"450px"}}>
-            <div id="filter-panel">
+        return<div id="filter-panel">
                 <div className="panel panel-default">
                     <div className="panel-body">
                         <form className="form-inline" role="form">
                             <div className="form-group">
                                 <label className="filter-col" htmlFor="pref-orderby">Сортировать
                                     по:</label>
-                                <select id="pref-orderby" className="form-control">
-                                    <option>Рейтинг</option>
-                                    <option>Год выпуска</option>
+                                <select  id="sort" className="form-control" onChange={this.sort}>
+                                    <option value="totalraiting" >Рейтинг</option>
+                                    <option selected value="year" >Год выпуска</option>
                                 </select>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+
     }
 
 });
 
 var Filter = React.createClass({
-
     filter(){
-        var requestBody;
+        var filters;
         var genres=[];
         $( ':checkbox:checked' ).each(function(){
             genres.push(this.value);
-            requestBody=requestBody+this.value+",";
+            filters=filters+this.value+",";
         });
-        requestBody="genres="+genres;
-        requestBody=requestBody+"&from="+document.getElementById("from").value;
-
-        requestBody=requestBody+"&before="+document.getElementById("before").value;
-
-
-        this.props.filter(requestBody);
+        filters="genres="+genres;
+        filters=filters+"&from="+document.getElementById("from").value;
+        filters=filters+"&to="+document.getElementById("to").value+"&";
+        this.props.filter(filters);
     },
     render: function () {
         let genres = this.props.genres.map(genre => {
@@ -77,8 +79,7 @@ var Filter = React.createClass({
                 </div>
             </li>
         });
-        return <div className="col-lg-4 col-md-4 col-xs-4">
-            <div id="accordion" className="panel panel-primary behclick-panel">
+        return <div id="accordion" className="panel panel-primary behclick-panel">
                 <div className="panel-heading">
                     <h3 className="panel-title">Фильтры</h3>
                 </div>
@@ -95,7 +96,7 @@ var Filter = React.createClass({
                         <input className="form-control" style={{width: "200px"}} id="from" type="text"
                                placeholder="Год"/>
                         <label style={{marginTop: "10px"}}>До</label>
-                        <input id="before" type="text" className="form-control" style={{width: "200px"}}
+                        <input id="to" type="text" className="form-control" style={{width: "200px"}}
                                placeholder="Год"/>
                     </div>
                     <div className="panel-heading">
@@ -109,41 +110,53 @@ var Filter = React.createClass({
                             {genres}
                         </ul>
                     </div>
-                    <button onClick={this.filter} style={{marginLeft: "130px",marginBottom:"20px"}} type="submit" className="btn btn-success ">
+                    <button onClick={this.filter} style={{marginLeft: "180px",marginBottom:"20px"}} type="submit" className="btn btn-success ">
                         Найти
                     </button>
                 </div>
             </div>
-        </div>
+
     }
 });
 
 
 var Search = React.createClass({
 
-    getInitialState: function () {
-        return {searchString: ''};
+
+    handleChange: function () {
+        var searchString = document.getElementById("search").value.trim().toLowerCase();
+        this.props.autocompleteByName(searchString);
+        document.getElementById("search").onkeydown=this.handle;
+    },
+    handleChangeSearchBy(){
+        var searchString = document.getElementById("search").value.trim().toLowerCase();
+        var searchBy= document.getElementById("searchBy").value;
+        this.props.search(searchString,searchBy);
     },
 
+     handle: function(e) {
+      if(e.keyCode==13){
+          var searchString = document.getElementById("search").value.trim().toLowerCase();
+          var searchBy= document.getElementById("searchBy").value;
+          this.props.search(searchString,searchBy);
+      }
 
-    handleChange: function (e) {
-        this.setState({searchString: e.target.value});
-        var searchString = this.state.searchString.trim().toLowerCase();
-        if (searchString.length > 0) {
-            //this.props.autocomplete();
-            var name = "name=" + searchString;
-            this.props.search(name);
-        }
-    },
-
-
+     },
     render: function () {
+        return  <div className="input-group">
+            <div className="input-group-btn search-panel">
 
-
-        return <div>
-            <input id="search" type="text" className="form-control" value={this.state.searchString}
-                   onChange={this.handleChange}
-                   placeholder="Введите здесь"/>
+            <select   id="searchBy" className="form-control" onChange={this.handleChangeSearchBy}>
+            <option value="name" selected ="">Искать по названию</option>
+            <option value="persons.firstName" >Искать по участикам</option>
+            <option value="description">Искать по описанию </option>
+        </select>
+            </div>
+         <div className="ui-widget">
+            <input   id="search" type="text" className="form-control"
+                     onChange={this.handleChange}
+                     placeholder="Введите здесь"/>
+         </div>
         </div>
     },
 
@@ -152,19 +165,35 @@ var Search = React.createClass({
 
 var App = React.createClass({
     getInitialState: function () {
-        return {movies: [], genres: []};
+        return {movies: [], genres: [],sortBy:"year",searchString: '',searchBy:"name",filters:"genres=&from=&to=&"};
     },
     componentWillMount: function () {
         this.loadMovies();
         this.loadGenres();
+    },
 
+    sort(sortBy){
+        this.setState({sortBy:sortBy});
+        this.searchFull(this.state.searchString,this.state.searchBy,this.state.filters,sortBy);
+    },
+
+    filter(filters){
+        this.setState({filters:filters});
+        this.searchFull(this.state.searchString,this.state.searchBy,filters,this.state.sortBy);
+    },
+
+
+    search(searchString,searchBy){
+        this.setState({searchString:searchString,searchBy:searchBy});
+        this.searchFull(searchString,searchBy,this.state.filters,this.state.sortBy);
 
     },
 
-    filter(requestBody){
-        var self = this;
 
-        fetch('/movie/filter', {
+    searchFull(searchString,searchBy,filters,sortBy){
+        var requestBody=filters+"sort="+sortBy+"&search="+searchString+"&searchBy="+searchBy;
+        var self = this;
+        fetch('/movie/fullSearch', {
             method: 'POST', headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
             }, body: requestBody
@@ -178,48 +207,23 @@ var App = React.createClass({
 
 
 
-    search(name){
-        var self = this;
-        fetch('/movie/search', {
+    loadMovies(){
+   var self = this;
+   var reqBody="sort="+self.state.sortBy;
+        fetch('/movie/getAllMovies', {
             method: 'POST', headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-            }, body: name
+            },body:reqBody
         }).then(function (response) {
-
             response.json().then(function (json) {
-
                 self.setState({movies: json});
-
-
             });
         });
-
-
     },
-
-
-    loadMovies(){
-
-        var self = this;
-        fetch('/movie/getAllMovies', {
-            method: 'GET', headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        }).then(function (response) {
-
-            response.json().then(function (json) {
-
-                self.setState({movies: json});
-
-
-            });
-        });
-
-    },
-    autocomplete(){
-
-        var param = "q=" + this.state.searchString;
-        var der = this;
+    autocompleteByName(searchString){
+        this.setState({searchString:searchString});
+    var param = "q=" + searchString;
+        let obj = [];
         fetch('/movie/autocomplete', {
             method: 'POST', headers: {
                 "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
@@ -227,30 +231,17 @@ var App = React.createClass({
         })
             .then(function (response) {
                 response.json().then(function (json) {
-
                     let data = json;
-
-                    der.setState({
-                        movies: data.hits.hits.map(h => {
-                            let obj = {};
+                     data.hits.hits.map(h => {
                             if (h.highlight && h.highlight.hasOwnProperty("name")) {
-                                obj.name = h.highlight.name;
+                                obj.push(h.highlight.name.toString());
                             } else {
-                                obj.name = h._source.name;
+                                obj.push(h._source.name.toString());
                             }
-
-                            if (h.highlight && h.highlight.hasOwnProperty("description")) {
-                                obj.description = h.highlight.description;
-                            } else {
-                                obj.description = h._source.description;
-                            }
-                            obj.img = h._source.img;
-                            obj.id = h._source.id;
-
-                            return obj;
                         })
-                    })
-
+                    jQuery("#search").autocomplete({
+                        source: obj
+                    });
                 });
             })
     },
@@ -279,18 +270,21 @@ var App = React.createClass({
             return <Movie movie={movie} key={movie.id}/>
         });
 
-        return <div className="container">
-            <div className="row">
-                <Sort/>
-            </div>
+        return <div className="container-fluid">
+             <div className="row">
+                 <div className="col-lg-4 col-md-4 col-xs-4" >
 
-            <div className="row">
-                <Filter genres={this.state.genres} filter={this.filter}/>
-                <div className="col-lg-8 col-md-8 col-xs-8">
-                    <Search search={this.search} autocomplete={this.autocomplete}/>
-                    <ul>
+                     <Sort sort={this.sort}/>
+                     <Filter genres={this.state.genres} filter={this.filter}/>
+                 </div>
+
+                <div className="col-lg-8 col-md-8 col-xs-8 " >
+
+                    <Search search={this.search} autocompleteByName={this.autocompleteByName}/>
+                    <ul >
                         {movies}
                     </ul>
+
                 </div>
             </div>
 

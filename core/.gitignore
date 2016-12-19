@@ -1,4 +1,11 @@
-
+target
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.idea
+/.settings
 # Created by https://www.gitignore.io/api/intellij,java
 
 ### Intellij ###
